@@ -11,6 +11,17 @@ server.use(parser.urlencoded({extended: true}));
 
 
 
+server.get("/countries", function(req, res){
+
+
+
+  
+
+})
+
+
+
+
 
 
 server.listen(3000, function(){
