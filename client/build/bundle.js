@@ -75,7 +75,7 @@ const RequestCountryAPI = __webpack_require__(1);
 const appStart = function(){
 
   requestCountryAPI = new RequestCountryAPI();
-  requestCountryAPI.getAllCountries();
+  requestCountryAPI.getAllCountries(CreateSelectListOfCountries);
 
 }
 
