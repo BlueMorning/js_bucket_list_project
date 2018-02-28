@@ -71,11 +71,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 const RequestCountryAPI = __webpack_require__(1);
+const CountryView = __webpack_require__(3);
 
 const appStart = function(){
 
-  requestCountryAPI = new RequestCountryAPI();
-  requestCountryAPI.getAllCountries(CreateSelectListOfCountries);
+
+
+  const requestCountryAPI = new RequestCountryAPI();
+  const countryView       = new CountryView();
+  requestCountryAPI.getAllCountries(countryView.CreateSelectListOfCountries);
 
 }
 
@@ -95,15 +99,17 @@ const RequestCountryAPI = function(){
 }
 
 RequestCountryAPI.prototype.getAllCountries = function(callback){
+  console.log("getAllCountries");
   const request = new XMLHttpRequest();
   request.open("GET", "https://restcountries.eu/rest/v2/all");
   request.addEventListener("load", function(){
-    getAllCountriesCallback(callback);
-  });
+    this.getAllCountriesCallback(callback);
+  }.bind(this));
   request.send();
 }
 
 RequestCountryAPI.prototype.getAllCountriesCallback = function(callback){
+  console.log(callback);
   if(this.status != 200){
     console.log(this.status);
   }
@@ -113,6 +119,35 @@ RequestCountryAPI.prototype.getAllCountriesCallback = function(callback){
       callback(countries);
   }
 }
+
+
+module.exports = RequestCountryAPI;
+
+
+/***/ }),
+/* 2 */,
+/* 3 */
+/***/ (function(module, exports) {
+
+const CountryView = function(){
+
+
+}
+
+
+/*** Method for populating the html select country list element ***/
+CountryView.prototype.CreateSelectListOfCountries = function(countries){
+  const container = document.getElementbyID('div-countries-list');
+  const select = document.createElement('select');
+  countries.forEach(function(country){
+    const option = document.createElement('option');
+    option.innerText = country.name;
+    select.appendChild(option);
+  });
+  container.appendChild(select);
+}
+
+module.exports = CountryView;
 
 
 /***/ })

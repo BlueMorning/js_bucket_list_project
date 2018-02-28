@@ -15,3 +15,5 @@ CountryView.prototype.CreateSelectListOfCountries = function(countries){
   });
   container.appendChild(select);
 }
+
+module.exports = CountryView;

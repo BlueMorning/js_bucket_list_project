@@ -1,9 +1,13 @@
 const RequestCountryAPI = require('./services/request.js');
+const CountryView = require('./views/countryView.js');
 
 const appStart = function(){
 
-  requestCountryAPI = new RequestCountryAPI();
-  requestCountryAPI.getAllCountries(CreateSelectListOfCountries);
+
+
+  const requestCountryAPI = new RequestCountryAPI();
+  const countryView       = new CountryView();
+  requestCountryAPI.getAllCountries(countryView.CreateSelectListOfCountries);
 
 }
 
